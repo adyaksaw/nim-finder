@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/nim-finder/precache-manifest.89a26d8c12bd24b63f0e5bdbcb446e41.js"
+  "/nim-finder/precache-manifest.26a3fbc0273d1153066f672f4a668ecf.js"
 );
 
 self.addEventListener('message', (event) => {
