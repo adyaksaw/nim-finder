@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import './App.css';
-import Controller from './Controller.js';
+import Navigation from './component/Navigation.js';
 
 
 class App extends Component{
   render(){
    return (
     <div>
-    <Controller /> 
+    <Navigation /> 
     </div>
     )
   }
