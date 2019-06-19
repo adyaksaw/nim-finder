@@ -26,7 +26,6 @@ class Authentication extends React.Component {
 		};
 	}
 
-
 	updateName(event){
 		this.setState({formName: event.target.value});
 	}
