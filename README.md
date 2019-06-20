@@ -3,6 +3,7 @@ By: Adyaksa Wisanggeni 13517091
 ## Setup
 Untuk menjalankan alplikasi ini, anda diharuskan memiliki npm (6.9.0)
 Untuk menjalankannya cukup jalankan ```npm run``` pada terminal di directory folder utama dari repository
+Demo aplikasi juga dapat dijalankan di https://firastic.github.io/nim-finder/
 -   Cara menggunakan aplikasi (termasuk screenshot dari aplikasi Anda)
     
 -   Desain aplikasi (class yang dibuat/digunakan, bagaimana aplikasi bekerja, dsb.)
