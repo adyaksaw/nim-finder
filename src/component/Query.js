@@ -1,6 +1,8 @@
 import React from 'react';
-const byIdEndpoint = 'https://api.stya.net/nim/byid';
-const byNameEndpoint = 'https://api.stya.net/nim/byname';
+import Table from './Table.js';
+import '../Css/button.css'
+const byEndPoint = ["https://api.stya.net/nim/byid", "https://api.stya.net/nim/byname"];
+const defaultCount = 10;
 
 class Query extends React.Component {
 	constructor(props){
@@ -11,7 +13,8 @@ class Query extends React.Component {
 			isQueried: false,
 			query: "",
 			currentPage: 0,
-			queriedData: []
+			queriedData: [],
+			queryType: 0,
 		}
 		this.prepareQuery = this.prepareQuery.bind(this);
 	}
@@ -31,30 +34,16 @@ class Query extends React.Component {
 
 	handleQuery(page){
 		if(!this.state.isQueried || page > 0){
-			this.state.isQueried = true
+			this.setState({isQueried: true})
 			this.timerId = null;
-			this.queriedData = [];
-			var json;
-			fetch(this.buildEndPoint(byIdEndpoint, this.state.query, 10, 1), this.buildRequest())
+			this.setState({queriedData: null});
+			fetch(this.buildEndPoint(byEndPoint[this.state.queryType], this.state.query, defaultCount, page), this.buildRequest())
 			.then(response => response.json())
 			.then(data => {
 				if(data.status === "OK"){
-					for(json in data.payload){
-						this.queriedData.push(data.payload[json]);
-					}
+					this.setState({queriedData: data.payload.slice(0)})
 				} else {
 					alert(data.code);
-				}
-			});
-			fetch(this.buildEndPoint(byNameEndpoint, this.state.query, 10, 0), this.buildRequest())
-			.then(response => response.json())
-			.then(data => {
-				if(data.status === "OK"){
-					for(json in data.payload){
-						this.queriedData.push(data.payload[json]);
-					}
-				} else {
-					alert(data.status);
 				}
 			});
 		}
@@ -62,10 +51,24 @@ class Query extends React.Component {
 
 	prepareQuery(e){
 		this.setState({query: e.target.value})
-		this.state.isQueried = false
+		this.setState({isQueried: false})
 		this.timerId = setInterval(
 			() => this.handleQuery(0),
 			300)
+	}
+
+	changeQueryType = (num) => () => {
+		this.setState({queryType: num})
+	}
+
+	nextPage = () => {
+		this.setState({currentPage: this.state.currentPage+1})
+		this.handleQuery(this.state.currentPage);
+	}
+
+	prevPage = () => {
+		this.setState({currentPage: this.state.currentPage-1})
+		this.handleQuery(this.state.currentPage);
 	}
 
 	componentWillUnmount() {
@@ -73,15 +76,23 @@ class Query extends React.Component {
 	}
 
 	render(){
+		console.log(this.state.queriedData);
 		return(
 			<div>
 				<form>
-					<input type="text" value={this.state.query} onChange={this.prepareQuery}/><br/>
-					{this.state.isQueried ?
-						<div>
-
-						</div> : null}
+					<input type="radio" name="queryType" value="nim" onChange={this.changeQueryType(0)}/> By NIM<br/>
+  					<input type="radio" name="queryType" value="name" onChange={this.changeQueryType(1)}/> By Name<br/>
 				</form>
+				<form>
+					<input type="text" value={this.state.query} onChange={this.prepareQuery}/><br/>
+				</form>
+				{this.state.isQueried ?
+					<div>
+						<Table data={this.state.queriedData}/>
+						{this.state.currentPage > 0 ? <button class="btn" onClick={this.prevPage}>Previous</button> : null}
+						{this.state.queriedData != null && this.state.queriedData.length < 10 && this.state.isQueried ? 
+							null : <button class="btn" onClick={this.nextPage}>Next</button>}
+					</div> : null}
 			</div>
 		)
 	}
