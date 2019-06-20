@@ -1,68 +1,34 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# NIM Finder
+By: Adyaksa Wisanggeni 13517091    
+## Setup
+Untuk menjalankan alplikasi ini, anda diharuskan memiliki npm (6.9.0)
+Untuk menjalankannya cukup jalankan ```npm run``` pada terminal di directory folder utama dari repository
+-   Cara menggunakan aplikasi (termasuk screenshot dari aplikasi Anda)
+    
+-   Desain aplikasi (class yang dibuat/digunakan, bagaimana aplikasi bekerja, dsb.)
+Terdapat 6 buah komponen pada program ini
+1. Navigation: Memilih komponen apa yang akan ditampilkan
+![homeImage](./screenshot/home.jpg)
+![homeImage2](./screenshot/home2.jpg)
+2. Login: Melakukan login
+![loginImage](./screenshot/login.jpg)
+3. Register: Melakukan registrasi
+![registerImage](./screenshot/register.jpg)
+4. Autentikasi: Cara melakukan autentikasi
+5. Query: Melakukan query
+![queryImage](./screenshot/query.jpg)
+6. Table: Membuat table dari hasil query
+![tableImage](./screenshot/table.jpg)
 
-## Available Scripts
+Alur kerja program ini adalah sebagai berikut
+1. Navigation memilih komponen apa yang akan ditampilkan
+2. Jika pengguna memilih login, login akan memanggil autentikasi dan memberikan cara menghandle login tersebut yang akan digunakan oleh autentikasi, hal yang sama berlaku untuk registrasi
+3. Jika pengguna memilih query, maka pengguna dapat memilih akan melakukan pencarian berdasarkan nim atau nama. Setelah memasukkan input, query akan memanggil table untuk menampilkan hasil query  
 
-In the project directory, you can run:
+## Library/kakas yang digunakan dalam aplikasi Anda
+1.  button.css diambil dari [https://freefrontend.com/css-buttons/](https://freefrontend.com/css-buttons/) dengan sedikit perubahan
+2. Library native-cookies
+3. ReactJS
 
-### `npm start`
-
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+## Review API
+Penggunaan api byid dan byname merupakan hal yang redundan. Dikarenakan nim mahasiswa terdiri dari angka dan nama mahasiswa terdiri dari huruf, API seharusnya dapat menerima segala jenis input dan melakukan parsing secara internal, sehingga ia hanya memerlukan 1 buah endpoint
